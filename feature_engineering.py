@@ -22,7 +22,7 @@ def engineer_features():
         print(f"Unique values in {categorical_feature}: {unique_values}")
     
     # If use case is used for clustering, drop Target column
-    data.drop(['Target'], axis=1, inplace=True)
+    # data.drop(['Target'], axis=1, inplace=True)
 
     # If use case is used for classification, balance Target classes
     '''
