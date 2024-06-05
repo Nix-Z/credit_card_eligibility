@@ -24,4 +24,4 @@ def analyze_data():
   print(f"\nNumerical Features: {numerical_features}")
   return data, categorical_features, numerical_features
   
-# analyze_data()
+analyze_data()
