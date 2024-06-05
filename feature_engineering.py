@@ -1,7 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.utils import resample
+from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 from datavisualization import visualize_data
 
 def engineer_features():
@@ -18,10 +21,21 @@ def engineer_features():
         unique_values = le.classes_
         print(f"Unique values in {categorical_feature}: {unique_values}")
 
-    print(data.head())
-
-    data.to_csv('credit_card_eligibility_cleansed_data.csv', index=False)
     
-    return data
+    # Upsample the minority class to address class imbalance
+    data_majority = data[data['Target'] == 0]
+    data_minority = data[data['Target'] == 1]
+    data_minority_upsampled = resample(data_minority, replace=True, n_samples=len(data_majority), random_state=1)
+    data_upsampled = pd.concat([data_majority, data_minority_upsampled], axis=0)
+
+    # Display the class distribution after upsampling
+    print("Class distribution after upsampling:")
+    print(data_upsampled['Target'].value_counts())
+
+    print(data_upsampled.head())
+
+    data_upsampled.to_csv('credit_card_eligibility_cleansed_data.csv', index=False)
+    
+    return data_upsampled
 
 engineer_features()
