@@ -24,4 +24,4 @@ def visualize_data():
 
     return data, categorical_features, numerical_features
 
-# visualize_data()
+visualize_data()
