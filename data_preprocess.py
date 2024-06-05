@@ -15,4 +15,4 @@ def preprocess_data():
   
   return data, categorical_features, numerical_features
 
-# preprocess_data()
+preprocess_data()
